@@ -1,0 +1,11 @@
+.card{
+    width: 500px;
+    border: 1px solid;
+    padding: 1rem;
+}
+
+.title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
