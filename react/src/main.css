@@ -1,12 +1,21 @@
+
 .card{
-    width: 500px;
     border: 1px solid;
     padding: 1rem;
-    margin-bottom: 1rem;
+    width: 500px;
 }
 
 .title{
     text-align: center;
     font-weight: bold;
-    font-size: 2rem;
+}
+
+img{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.users{
+    display: flex;
 }
