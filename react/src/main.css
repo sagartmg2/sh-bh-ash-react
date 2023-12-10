@@ -1,3 +1,7 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
 
 .card{
     border: 1px solid;
@@ -18,4 +22,13 @@ img{
 
 .users{
     display: flex;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th,td{
+    border: 1px solid;
+    padding: 1rem;
 }

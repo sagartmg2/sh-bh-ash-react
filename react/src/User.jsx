@@ -1,8 +1,18 @@
+import DeleteButton from "./components/DeleteButton"
+import EditButton from "./components/EditButton"
+
 function User() {
     return <>
-        <div >
+        <div style={{
+            border:"1px solid",
+            padding:"1 rem"
+
+        }} >
             <img src="https://picsum.photos/200/200" alt="" />
-            <p style={{ textAlign: "center" }}>Ram</p>
+            <p className="" style={{ textAlign: "center" }}>Ram</p>
+           <EditButton/>
+           <DeleteButton/>
+          
         </div>
     </>
 }
