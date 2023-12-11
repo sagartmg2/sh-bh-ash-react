@@ -1,5 +1,6 @@
 import Course from "./Course"
 import User from "./User"
+import Todos from "./Todos"
 
 import Glass from "./assets/images/glasses.jpg"
 import DeleteButton from "./components/DeleteButton"
@@ -11,20 +12,32 @@ let usersStyle = {
 }
 
 let users = [
-    {name:"ram",email:"ram@gmail.com"},
-    {name:"ram1",email:"ram@gmail.com"},
-    {name:"ram2",email:"ram@gmail.com"},
-    {name:"ram3",email:"ram@gmail.com"},
-    {name:"ram4",email:"ram@gmail.com"},
+    { name: "ram", email: "ram@gmail.com" },
+    { name: "ram1", email: "ram@gmail.com" },
+    { name: "ram2", email: "ram@gmail.com" },
+    { name: "ram3", email: "ram@gmail.com" },
+    { name: "ram4", email: "ram@gmail.com" },
 ]
+
+let courses = ["react","node","javascript"]
 
 function App() {
     return (
         <div>
+            <Todos/>
+
+            <hr />
             <h1 className="text-red-500 text-5xl mb-8 ">Courses</h1>
+            {/* replace below code using course.map */}
+            {
+                courses.map(el => <Course title={el}/>)
+            }
+            
+           {/* 
             <Course title={"react"} />
             <Course title={"node"} />
-            <Course title="js" />
+            <Course title="js" /> 
+            */}
             <h2>Users</h2>
 
             <div style={usersStyle} >
@@ -35,7 +48,7 @@ function App() {
                 <User />
             </div>
 
-        <table style={{marginTop:"1rem"}}>
+            <table style={{ marginTop: "1rem" }}>
                 <tr>
                     <th>Name</th>
                     <th>email</th>
@@ -44,7 +57,7 @@ function App() {
                 <tr>
                     <td>xyz</td>
                     <td>xyz@gmail.com</td>
-                    <td> <EditButton/> <DeleteButton/> </td>
+                    <td> <EditButton /> <DeleteButton /> </td>
                 </tr>
                 <tr>
                     <td>xyz</td>
