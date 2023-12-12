@@ -1,6 +1,7 @@
 import Course from "./Course"
 import User from "./User"
 import Todos from "./Todos"
+import Counter from "./Counter"
 
 import Glass from "./assets/images/glasses.jpg"
 import DeleteButton from "./components/DeleteButton"
@@ -22,8 +23,10 @@ let users = [
 let courses = ["react","node","javascript"]
 
 function App() {
+    return <Counter/>
     return (
         <div>
+            <Counter/>
             <Todos/>
 
             <hr />

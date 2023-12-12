@@ -7,6 +7,7 @@ let todos = [
     { title: "react", status: false }
 ]
 
+
 /* 
 let todosinHTML = todos.map(el =>{
     return <li> {el} </li>
@@ -52,9 +53,17 @@ const Todos = () => {
                         */
                         return <tr key={el.title}>
                             <td>{el.title}</td>
-                            <td>{el.status ? "complted" : "pending"}</td>
+                            <td
+                                // style={{
+                                //     background: el.status ?"green" :"red",
+                                //     color:"white"
+                                // }}
+                                // className={el.status? "bg-green capitalize" : "bg-red capitalize"}
+                                className={`capitalize ${el.status ? "bg-green" : "bg-red"}`}
+                            >
+                                {el.status ? "complted" : "pending"}
+                            </td>
                         </tr>
-
                     })
                 }
             </tbody>

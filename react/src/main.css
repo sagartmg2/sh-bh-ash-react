@@ -35,3 +35,16 @@ th,td{
     border: 1px solid;
     padding: 1rem;
 }
+
+.bg-green{
+    background-color: green;
+    color: white;
+}
+.bg-red{
+    background-color: red;
+    color: white;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
