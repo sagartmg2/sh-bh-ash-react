@@ -1,8 +1,10 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
+.header{
 
+}
 .card{
     border: 1px solid;
     padding: 1rem;
@@ -13,6 +15,10 @@
     text-align: center;
     font-weight: bold;
 }
+
+/* button:hover{
+    box-shadow: 5px 5px black;
+} */
 
 img{
     border-radius: 50%;
