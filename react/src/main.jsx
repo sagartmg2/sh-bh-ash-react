@@ -5,10 +5,12 @@ import ReactDOM from 'react-dom/client'
 import "./main.css"
 import Counter from './Counter'
 import GoogleTabs from './GoogleTabs'
+import ApiUsersList from './ApiUsersList'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-  <GoogleTabs/>
+  {/* <GoogleTabs/> */}
+  <ApiUsersList/>
   {/* <Counter /> */}
   </>
 )
