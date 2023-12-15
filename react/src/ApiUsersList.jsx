@@ -1,30 +1,28 @@
-import axios from "axios"
 import { useState, useEffect } from "react"
 
 function ApiUsersList() {
-    console.log("redner");
-    /* make api call */
-    const [users, setUsers] = useState([])
 
-    axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(res => {
-            console.log(res)
-            // setUsers(res.data)
-            /* infinite loop
-            usestate - triggers render
-    
-            */
-        })
-
-
+    // let selectedOption = null
+    const [selectedOption, setSelectedOption] = useState("one")  // return [state,stateMuatatorFunction]
+    let items = ["one", "two", "three", "four"]
+    console.log("render..");
     return <>
-        api users list.
-        <ul className="p-4">
-            {/* <li>ram</li>
-            <li>shyam..</li>
-            <li>hari..</li> */}
-            {JSON.stringify(users)}
+        <h1 className="text-5xl">The user has selected {selectedOption}</h1>
+        <hr className="my-5" />
+
+        <ul className="pl-5">
+            {
+                items.map(el => {
+                    return <li onClick={() => {
+                        console.log(el)
+                        setSelectedOption(el)
+                        // selectedOption = el  // wrong // cannot change state directly
+                        console.log({ selectedOption });
+                    }} >{el}</li>
+                })
+            }
         </ul>
+        <hr className="my-5" />
     </>
 }
 

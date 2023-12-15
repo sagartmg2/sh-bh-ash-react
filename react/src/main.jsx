@@ -6,11 +6,13 @@ import "./main.css"
 import Counter from './Counter'
 import GoogleTabs from './GoogleTabs'
 import ApiUsersList from './ApiUsersList'
+import TodosList from './TodosList'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
+  <TodosList/>
   {/* <GoogleTabs/> */}
-  <ApiUsersList/>
+  {/* <ApiUsersList/> */}
   {/* <Counter /> */}
   </>
 )
