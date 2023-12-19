@@ -7,10 +7,12 @@ import Counter from './Counter'
 import GoogleTabs from './GoogleTabs'
 import ApiUsersList from './ApiUsersList'
 import TodosList from './TodosList'
+import ApiComments from './ApiComments'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-  <TodosList/>
+  <ApiComments/>
+  {/* <TodosList/> */}
   {/* <GoogleTabs/> */}
   {/* <ApiUsersList/> */}
   {/* <Counter /> */}

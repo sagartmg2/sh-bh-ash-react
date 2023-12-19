@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-.header{
 
+@layer components{
+    .btn{
+        @apply px-3 py-2 bg-slate-400 border border-black rounded-xl
+    }
+}
+
+/* .btn{
+    background-color: gray;
+    padding: 10px 20px;
+} */
+
+.header{
 }
 .card{
     border: 1px solid;

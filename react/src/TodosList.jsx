@@ -17,7 +17,7 @@ function TodosList() {
         },
     ])
 
-    const [pageTitle, setPageTile] = useState("todos")
+    const [pageTitle, setPageTile] = useState("todos")  // return ["todos",() =>{}]
 
     const handleFormSubmit = (e) => {
         e.preventDefault(); // prevents page refresh on form submit
@@ -27,11 +27,11 @@ function TodosList() {
 
         let userInput = e.target.title.value
         let userInputStatus = e.target.status.value
-        // todos.push(userInput) // should not chgange state varialbe direclty
+        // todos.push(userInput) // must not chgange state varialbe direclty
         let temp = [...todos] // ... spread operator  // research: reference data types
         temp.push({
             title: userInput,
-            status: userInputStatus
+            status: userInputStatus === "true" ? true : false
         })  // [html,css]
         setTodos(temp)
         console.log({ todos });
@@ -39,8 +39,11 @@ function TodosList() {
 
     function deleteTodo(index) {
         console.log("deleted index", index);
-        let remainingTodos = [...todos]
+
+        let remainingTodos = [...todos].filter((el, idx) => index != idx)
+
         /* code here to delete */
+
         setTodos(remainingTodos) // re-render gets trigreed
     }
 
@@ -70,7 +73,7 @@ function TodosList() {
             {
                 todos.map((el, index) => {
                     return <li >
-                        {el.title} ( {el.status})
+                        {el.title} ( {el.status ? "completed" : "pending"})
                         <button onClick={() => {
                             deleteTodo(index)
                         }} className="bg-slate-300">delete</button>
