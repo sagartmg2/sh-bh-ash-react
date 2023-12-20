@@ -7,7 +7,6 @@ function ApiComments() {
     function fetchApi() {
         /* make api requrest */
         let apiData  = ["one","two","three","four"]
-
         /* request methods
             get - read
             post - create
