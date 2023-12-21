@@ -10,11 +10,13 @@ import TodosList from './TodosList'
 import ApiComments from './ApiComments'
 import ApiProducts from './ApiProducts'
 import ApiProductsAutoLoad from './ApiProductsAutoLoad'
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <ApiProductsAutoLoad />
-    {/* <ApiProducts/> */}
+    {/* <App/> */}
+    {/* <ApiProductsAutoLoad /> */}
+    <ApiProducts/>
     {/* <ApiComments/> */}
     {/* <TodosList/> */}
     {/* <GoogleTabs/> */}

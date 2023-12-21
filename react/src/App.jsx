@@ -6,37 +6,45 @@ import Counter from "./Counter"
 import Glass from "./assets/images/glasses.jpg"
 import DeleteButton from "./components/DeleteButton"
 import EditButton from "./components/EditButton"
+import { useState } from "react"
 
 let usersStyle = {
     display: "flex",
     gap: ".5rem"
 }
 
-let users = [
-    { name: "ram", email: "ram@gmail.com" },
-    { name: "ram1", email: "ram@gmail.com" },
-    { name: "ram2", email: "ram@gmail.com" },
-    { name: "ram3", email: "ram@gmail.com" },
-    { name: "ram4", email: "ram@gmail.com" },
-]
-
-let courses = ["react","node","javascript"]
+let courses = ["react", "node", "javascript"]
 
 function App() {
-    return <Counter/>
+    const [showCounter, setShowCounter] = useState(false)
+
+
+    return <>
+        <button className="btn"
+            onClick={() => {
+                setShowCounter(!showCounter)
+            }}
+        >show/hide counter</button>
+        <hr />
+        {
+            showCounter
+            &&
+            <Counter />
+        }
+    </>
     return (
         <div>
-            <Counter/>
-            <Todos/>
+            <Counter />
+            <Todos />
 
             <hr />
             <h1 className="text-red-500 text-5xl mb-8 ">Courses</h1>
             {/* replace below code using course.map */}
             {
-                courses.map(el => <Course title={el}/>)
+                courses.map(el => <Course title={el} />)
             }
-            
-           {/* 
+
+            {/* 
             <Course title={"react"} />
             <Course title={"node"} />
             <Course title="js" /> 

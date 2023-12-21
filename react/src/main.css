@@ -6,7 +6,7 @@
 @layer components{
     .btn{
         @apply px-3 py-2 bg-slate-400 border border-black rounded-xl
-    }
+    }   
 }
 
 /* .btn{
