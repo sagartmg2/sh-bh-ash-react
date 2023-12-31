@@ -4,6 +4,6 @@
 
 @layer components{
     .container{
-        @apply px-3
+        @apply px-3 mx-auto
     }
 }
