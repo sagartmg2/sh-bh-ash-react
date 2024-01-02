@@ -52,7 +52,7 @@ export default function Header() {
         </ul>
         <form className="flex justify-center w-full lg:w-auto">
           <input className="px-3 border border-[#E7E6EF] focus:border-secondary focus:outline-none" type="text" />
-          <button className="bg-secondary px-1">
+          <button type="submit" className="bg-secondary px-1">
             <CiSearch className="text-white" />
           </button>
         </form>
