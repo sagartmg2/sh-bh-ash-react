@@ -81,7 +81,7 @@ export default function Banner() {
                 <div className="container flex h-full items-center">
                   <div className="">
                     <p className="font-bold text-secondary mb-3">{el.subTitle}</p>
-                    <h2 className="mb-3 text-[53px] font-bold max-w-[644px] tracking-[1.06px]]" >{el.title}</h2>
+                    <h2 className="font-joshephens mb-3 text-[53px] font-bold max-w-[644px] tracking-[1.06px]]" >{el.title}</h2>
                     <p className="mb-3">{el.description}</p>
                     <button type="button" className="btn">
                       Shop now 

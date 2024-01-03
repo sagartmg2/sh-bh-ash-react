@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        // sans:["Josefin Sans"],
+        joshephens:["Josefin Sans"]
+      },
       // screens:{
       //   sm:"576px",
       //   "tab":"768px",

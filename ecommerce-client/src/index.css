@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 @layer components{
     .container{
@@ -29,5 +34,5 @@
     min-with:640px then .container max-width = 600px */
 
 *{
-    background-color: rgba(255,0,0,0.005);
+    /* background-color: rgba(255,0,0,0.005); */
 }
