@@ -18,6 +18,10 @@
     .btn{
         @apply bg-secondary px-10 py-4 text-white rounded-[2px]
     }
+
+    .flex-center{
+        @apply flex items-center justify-center
+    }
     
 }
 @layer utilities{
