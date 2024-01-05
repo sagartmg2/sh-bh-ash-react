@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../components/home/Banner";
 import Product from "../components/common/product/Product";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Home() {
+  const [latestProducts,setLatestProduct] = useState([])
+  const [trendingProducts,setTrendingPrducts] = useState([])
+
+  useEffect(() =>{
+  axios.get('https://ecommerce-sagartmg2.vercel.app/api/products/trending')
+  .then((res) =>{
+    // console.log(res.data.data)
+    setTrendingPrducts(res.data.data)
+    /* 
+    [{
+            "_id": "64549d085e021d67be48e82a",
+            "name": "PC",
+            "price": 10000,
+            "count": 2,
+            "image": "http://res.cloudinary.com/dtv8dtpkm/image/upload/v1683266823/lbrkqamcqdsz4lgl6was.jpg"
+        }],
+         */
+    
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+  axios.get('https://ecommerce-sagartmg2.vercel.app/api/products?per_page=6')
+  .then((res) =>{
+    setLatestProduct(res.data.products)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+
+  return () =>{
+    /* clean up function */
+    // clearTimeout()
+  }
+
+  },[]) // [] this will run only once during compontent mount
+
   return (
     <>
       <Banner />
@@ -19,8 +58,8 @@ export default function Home() {
 
       <div className="flex">
         <ul className="container mt-24 grid gap-4 sm:mt-28 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:mt-[226px] ">
-          {[1, 2, 3, 4].map((el) => {
-            return <Product />;
+          {trendingProducts.map((el) => {
+            return <Product key={el._id} product = {el} />;
           })}
         </ul>
       </div>
@@ -28,7 +67,7 @@ export default function Home() {
         <h2 className="text-center font-joshephens font-bold text-[40px] text-primary-dark">Latest products</h2>
 
         <ul className="container grid gap-[31px] md:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3, 4, 5, 6].map((el) => {
+          {latestProducts.map((product) => {  // product ={name,image,price}
             return (
               <li className="group relative  border-4  hover:shadow-2xl">
                 <Link to="/products/watch">
@@ -50,10 +89,10 @@ export default function Home() {
                       <CiShoppingCart className="text-primary" />{" "}
                     </span>
                   </div>
-                  <img src="/chair.png" className="mx-auto mb-[20px]" alt="" />
+                  <img src={product.image} className="mx-auto mb-[20px]" alt="" />
                   <div className=" flex justify-between px-4 py-4 text-primary ">
-                    <p>Cantilever chair</p>
-                    <p className="text-secondary">$42.00</p>
+                    <p>{product.name}</p>
+                    <p className="text-secondary">{product.price}</p>
                   </div>
                 </Link>
               </li>
