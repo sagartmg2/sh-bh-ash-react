@@ -4,6 +4,8 @@ import Slider from "react-slick";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+
 export default function Banner() {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -29,7 +31,7 @@ export default function Banner() {
 
   var settings = {
     dots: true,
-    arrows:true,
+    arrows: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -73,18 +75,23 @@ export default function Banner() {
           return (
             <>
               <div
-                className="bg-[url('/banner-images/banner-1.png')]] relative h-[564px]  bg-contain md:bg-cover bg-center bg-no-repeat md:h-[764px]"
+                className="bg-[url('/banner-images/banner-1.png')]] relative h-[564px]  bg-contain bg-center bg-no-repeat md:h-[764px] md:bg-cover"
                 style={{
                   backgroundImage: `url('${el.image}')`,
                 }}
               >
                 <div className="container flex h-full items-center">
                   <div className="">
-                    <p className="font-bold text-secondary mb-3">{el.subTitle}</p>
-                    <h2 className="font-joshephens mb-3 text-[53px] font-bold max-w-[644px] tracking-[1.06px]]" >{el.title}</h2>
+                    <p className="mb-3 font-bold text-secondary">
+                      {el.subTitle}
+                    </p>
+                    <h2 className="tracking-[1.06px]] mb-3 max-w-[644px]	font-joshephens	text-[25.92px]	font-bold	md:text-[31.1px] lg:text-[37.32px] xl:text-[44.79px] 2xl:text-[53.75px]">
+                      {el.title}
+                    </h2>
+
                     <p className="mb-3">{el.description}</p>
                     <button type="button" className="btn">
-                      Shop now 
+                      Shop now
                     </button>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Product({ product }) {  //product={image,name,price}
   return (
     <li className="group relative  border-4  hover:shadow-2xl">
-      <Link to="/products/watch">
+      <Link to={`/products/${product._id}`}>
         <div className="absolute left-4 top-4 flex gap-2">
           <span
             onClick={() => {
@@ -24,7 +24,7 @@ export default function Product({ product }) {  //product={image,name,price}
             <CiShoppingCart className="text-primary" />{" "}
           </span>
         </div>
-        <img src={product.image} className="h-[200px] mx-auto mb-[20px]" alt="" />
+        <img src={product.image} className="h-[200px] mx-auto mb-[20px] w-full object-cover" alt="" />
         <div className="py-4 text-center group-hover:bg-primary group-hover:text-white">
           <p>{product.name}</p>
           <p>Code - Y523201</p>
