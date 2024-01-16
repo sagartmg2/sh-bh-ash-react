@@ -73,7 +73,6 @@ export default function Banner() {
       <Slider {...settings}>
         {bannerData.map((el) => {
           return (
-            <>
               <div
                 className="bg-[url('/banner-images/banner-1.png')]] relative h-[564px]  bg-contain bg-center bg-no-repeat md:h-[764px] md:bg-cover"
                 style={{
@@ -96,7 +95,6 @@ export default function Banner() {
                   </div>
                 </div>
               </div>
-            </>
           );
         })}
       </Slider>

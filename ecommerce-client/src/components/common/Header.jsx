@@ -25,7 +25,7 @@ export default function Header() {
             <span>mhhasanul@gmail.com</span>
           </div>
           <div className="flex items-center gap-2">
-            <span>login</span>
+            <span><Link to="/login">login</Link></span>
             <CiShoppingCart className="text-xl text-white" />
           </div>
         </div>

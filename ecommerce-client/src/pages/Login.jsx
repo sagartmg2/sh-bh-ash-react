@@ -1,7 +1,77 @@
-import React from 'react'
+import React from "react";
+import BreadCrumb from "../components/common/BreadCrumb";
+import axios from "axios";
 
 export default function Login() {
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    axios.post("https://ecommerce-sagartmg2.vercel.app/api/users/login",{
+      email:"b@b.com",
+      password:"password",
+    })
+
+  }
   return (
-    <div>Login</div>
-  )
+    <>
+      <BreadCrumb
+        title={"login"}
+        links={[
+          { title: "Home", url: "/" },
+          { title: "Login", url: "#" },
+        ]}
+      />
+      <div className="w-full max-w-xs container my-20">
+        <form onSubmit={handleSubmit}className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md">
+          <div className="mb-4">
+            <label
+              className="mb-2 block text-sm font-bold text-gray-700"
+              for="username"
+            >
+              Username
+            </label>
+            <input
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              id="username"
+              type="text"
+              placeholder="Username"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="mb-2 block text-sm font-bold text-gray-700"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              className="focus:shadow-outline mb-3 w-full appearance-none rounded border border-red-5000 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              id="password"
+              type="password"
+              placeholder="******************"
+            />
+            {/* <p className="text-xs italic text-red-5000">
+              Please choose a password.
+            </p> */}
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+              type="submit"
+            >
+              Sign In
+            </button>
+            <a
+              className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
+              href="#"
+            >
+              Forgot Password?
+            </a>
+          </div>
+        </form>
+        <p className="text-center text-xs text-gray-500">
+          &copy;2020 Acme Corp. All rights reserved.
+        </p>
+      </div>
+    </>
+  );
 }
