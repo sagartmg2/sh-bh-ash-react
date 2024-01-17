@@ -5,7 +5,9 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Products from './pages/Products'
 import SingleProduct from './pages/SingleProduct'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Singup from './pages/SingnUp'
 
 export default function App() {
   return (
@@ -14,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='login' element={<Login />} />
+        <Route path='signup' element={<Singup />} />
 
         {/* <Route path='products' element={<Products />} />
         <Route path='products/:slug' element={<SingleProduct />} /> */}
@@ -24,6 +27,7 @@ export default function App() {
         </Route>
       </Routes>
       <footer/>
+      <ToastContainer/>
     </>
 
   )

@@ -24,6 +24,11 @@ export default function Header() {
             <CiMail className="text-xl text-white" />
             <span>mhhasanul@gmail.com</span>
           </div>
+          
+          buyerName
+          &nbsp;
+          logout
+
           <div className="flex items-center gap-2">
             <span><Link to="/login">login</Link></span>
             <CiShoppingCart className="text-xl text-white" />
