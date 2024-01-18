@@ -3,9 +3,12 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import axios from "axios";
 import {  toast } from 'react-toastify';
 import { useNavigate,Link } from "react-router-dom";
+import { setUser } from "../app/slice/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) =>{
     event.preventDefault()
@@ -18,6 +21,7 @@ export default function Login() {
       toast("Login successful!")
       console.log(res.data.user)
       navigate("/")
+      dispatch(setUser(res.data.user))
       
     })
     .catch(err =>{

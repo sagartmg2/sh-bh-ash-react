@@ -7,9 +7,13 @@ import {
   CiShoppingCart,
 } from "react-icons/ci";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const user = useSelector((store)=> store.user.value)
+
 
   const toggleMenu = () => {
     // setIsMenuOpen(!isMenuOpen)
@@ -25,6 +29,7 @@ export default function Header() {
             <span>mhhasanul@gmail.com</span>
           </div>
           
+          {JSON.stringify(user)}
           buyerName
           &nbsp;
           logout
