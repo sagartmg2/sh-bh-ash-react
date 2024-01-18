@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './components/common/Header'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
@@ -10,12 +10,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Singup from './pages/SingnUp'
 
 export default function App() {
+  const [user, setUser] = useState(null);
+  
   return (
     <>
-      <Header />
+      <Header user={user} setUser={setUser} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<Login setUser={setUser} />} />
         <Route path='signup' element={<Singup />} />
 
         {/* <Route path='products' element={<Products />} />

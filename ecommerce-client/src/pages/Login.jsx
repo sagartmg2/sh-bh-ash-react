@@ -4,7 +4,7 @@ import axios from "axios";
 import {  toast } from 'react-toastify';
 import { useNavigate,Link } from "react-router-dom";
 
-export default function Login() {
+export default function Login({setUser}) {
   const navigate = useNavigate()
 
   const handleSubmit = (event) =>{
@@ -15,13 +15,20 @@ export default function Login() {
     })
     .then(res =>{
       // when status code in 2's line
+      // let naame = fullName
       toast("Login successful!")
       console.log(res.data.user)
+      setUser(res.data.user)
       navigate("/")
       
     })
     .catch(err =>{
-      toast.error("Inavld creadentails")
+      console.log(err)
+      if(err.response?.status === 401){
+        return toast.error("Inavld creadentails")
+      }
+      toast.error("Something Went Wrong. try again later")
+
       // when status code 3,4,5 
     })
   }
@@ -46,7 +53,7 @@ export default function Login() {
             <input
               className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
               id="email"
-              value={"b@b.com"}
+              // value={"em@gmail.com"}
               type="email"
               name="email"
               placeholder="email"

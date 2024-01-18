@@ -7,8 +7,9 @@ import {
   CiShoppingCart,
 } from "react-icons/ci";
 import { useState } from "react";
+import TopNavBar from "./TopNavBar";
 
-export default function Header() {
+export default function Header({user ,setUser}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,23 +19,7 @@ export default function Header() {
 
   return (
     <header className="">
-      <nav className="bg-primary py-3 text-white">
-        <div className="container flex flex-col items-center  font-semibold  md:flex-row md:justify-between   ">
-          <div className="flex items-center gap-2">
-            <CiMail className="text-xl text-white" />
-            <span>mhhasanul@gmail.com</span>
-          </div>
-          
-          buyerName
-          &nbsp;
-          logout
-
-          <div className="flex items-center gap-2">
-            <span><Link to="/login">login</Link></span>
-            <CiShoppingCart className="text-xl text-white" />
-          </div>
-        </div>
-      </nav>
+      <TopNavBar user={user} setUser = {setUser} />
       <nav className=" container flex flex-wrap items-center justify-between ">
         <span className="text-blue- text-[34px] font-semibold">Hekto</span>
         <CiMenuBurger
@@ -55,8 +40,11 @@ export default function Header() {
             <Link to="/products">products</Link>
           </li>
         </ul>
-        <form className="flex justify-center w-full lg:w-auto">
-          <input className="px-3 border border-[#E7E6EF] focus:border-secondary focus:outline-none" type="text" />
+        <form className="flex w-full justify-center lg:w-auto">
+          <input
+            className="border border-[#E7E6EF] px-3 focus:border-secondary focus:outline-none"
+            type="text"
+          />
           <button type="submit" className="bg-secondary px-1">
             <CiSearch className="text-white" />
           </button>
