@@ -22,6 +22,7 @@ export default function Login() {
       console.log(res.data.user)
       navigate("/")
       dispatch(setUser(res.data.user))
+      localStorage.setItem("access_token",res.data.access_token)
       
     })
     .catch(err =>{

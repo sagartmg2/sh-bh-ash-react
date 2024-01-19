@@ -6,12 +6,17 @@ export const userSlice = createSlice({
     value: null,
   },
   reducers: {
-    setUser: (state,payload) => {
-      state.value = { name: "ram" };
+    setUser: (state, action) => {
+      console.log(action);
+      state.value = action.payload;
+    },
+    logout: (state) => {
+      state.value = null;
+      localStorage.removeItem("access_token")
     },
   },
 });
 
-export const { setUser } = userSlice.actions;
-
-export default userSlice.reducer;
+export const { setUser,logout } = userSlice.actions;  // named export
+ 
+export default userSlice.reducer; // default export

@@ -8,6 +8,7 @@ import {
 } from "react-icons/ci";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import TopNavBar from "./TopNavBar";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,24 +23,7 @@ export default function Header() {
 
   return (
     <header className="">
-      <nav className="bg-primary py-3 text-white">
-        <div className="container flex flex-col items-center  font-semibold  md:flex-row md:justify-between   ">
-          <div className="flex items-center gap-2">
-            <CiMail className="text-xl text-white" />
-            <span>mhhasanul@gmail.com</span>
-          </div>
-          
-          {JSON.stringify(user)}
-          buyerName
-          &nbsp;
-          logout
-
-          <div className="flex items-center gap-2">
-            <span><Link to="/login">login</Link></span>
-            <CiShoppingCart className="text-xl text-white" />
-          </div>
-        </div>
-      </nav>
+      <TopNavBar/>
       <nav className=" container flex flex-wrap items-center justify-between ">
         <span className="text-blue- text-[34px] font-semibold">Hekto</span>
         <CiMenuBurger
@@ -58,6 +42,9 @@ export default function Header() {
           </li>
           <li>
             <Link to="/products">products</Link>
+          </li>
+          <li>
+            <Link to="/carts">carts</Link>
           </li>
         </ul>
         <form className="flex justify-center w-full lg:w-auto">
