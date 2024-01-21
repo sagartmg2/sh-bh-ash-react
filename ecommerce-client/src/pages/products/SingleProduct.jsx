@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BreadCrumb from "../components/common/BreadCrumb";
+import BreadCrumb from "../../components/common/BreadCrumb";
 import { FaRegHeart, FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import { useSearchParams ,useParams } from "react-router-dom";

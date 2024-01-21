@@ -15,7 +15,6 @@ export default function Header() {
 
   const user = useSelector((store)=> store.user.value)
 
-
   const toggleMenu = () => {
     // setIsMenuOpen(!isMenuOpen)
     setIsMenuOpen((prev) => !prev);
@@ -45,6 +44,10 @@ export default function Header() {
           </li>
           <li>
             <Link to="/carts">carts</Link>
+          </li>
+         
+          <li>
+            <Link to="/products/add">add-products</Link>
           </li>
         </ul>
         <form className="flex justify-center w-full lg:w-auto">

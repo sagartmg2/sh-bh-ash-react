@@ -26,13 +26,28 @@ export default function TopNavBar() {
           <CiMail className="text-xl text-white" />
           <span>mhhasanul@gmail.com</span>
         </div>
+        {/* falsy values
+              false
+              null
+              undefined
+              0
+              NaN
+              ""
+
+               if(!false){
+                
+               }
+        */}
 
         <div className="flex items-center gap-2">
           {user ? (
             <>
               cart(0)
               <span>{user.name}</span>
-              <span onClick={handleLogout}>logout</span>
+              {/* <span onClick={handleLogout}>logout</span> */}
+              <span onClick={() =>{
+                dispatach(logout())
+              }}>logout</span>
             </>
           ) : (
             <span>
