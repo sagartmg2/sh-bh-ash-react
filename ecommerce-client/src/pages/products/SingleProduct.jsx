@@ -3,6 +3,7 @@ import BreadCrumb from "../../components/common/BreadCrumb";
 import { FaRegHeart, FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import { useSearchParams ,useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function SingleProduct() {
@@ -67,6 +68,16 @@ export default function SingleProduct() {
           </div>
         </div>
       </div>
+
+      <form onSubmit={(e) =>{
+        e.preventDefault()
+        toast.error("login requried.")
+
+      }}>
+        <input type="text" className="border px-4 py-2" />
+        <input type="text" className="border px-4 py-2" />
+        <button className="btn">Add Review</button>
+      </form>
 
       <div className="mb-32 h-[500px] bg-[#F9F8FE]">
         <div className="container">

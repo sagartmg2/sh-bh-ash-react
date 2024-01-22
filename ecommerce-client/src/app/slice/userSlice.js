@@ -14,6 +14,10 @@ export const userSlice = createSlice({
       state.value = null;
       localStorage.removeItem("access_token")
     },
+    increment: (state) => {
+      state.value = null;
+      localStorage.setItem("cartcount",123)
+    },
   },
 });
 

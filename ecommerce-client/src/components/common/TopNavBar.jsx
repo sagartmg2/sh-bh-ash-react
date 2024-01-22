@@ -9,6 +9,8 @@ import {
 } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, setUser } from "../../app/slice/userSlice";
+import BuyerComponent from "./BuyerComponent";
+import ProtectedComponent from "./ProtectedComponent";
 
 export default function TopNavBar() {
   const user = useSelector((store) => store.user.value);
@@ -40,21 +42,33 @@ export default function TopNavBar() {
         */}
 
         <div className="flex items-center gap-2">
+          <BuyerComponent>cart(0)</BuyerComponent>
           {user ? (
             <>
-              cart(0)
               <span>{user.name}</span>
               {/* <span onClick={handleLogout}>logout</span> */}
-              <span onClick={() =>{
-                dispatach(logout())
-              }}>logout</span>
+              <span
+                onClick={() => {
+                  dispatach(logout());
+                }}
+              >
+                logout
+              </span>
             </>
           ) : (
             <span>
               <Link to="/login">login</Link>
             </span>
           )}
-          <CiShoppingCart className="text-xl text-white" />
+          {/* {user.role == "buyer" && (
+            <CiShoppingCart className="text-xl text-white" />
+          )} */}
+          {/* <BuyerComponent>
+            <CiShoppingCart className="text-xl text-white" />
+          </BuyerComponent> */}
+          <ProtectedComponent role="buyer">
+            <CiShoppingCart className="text-xl text-white" />
+          </ProtectedComponent>
         </div>
       </div>
     </nav>

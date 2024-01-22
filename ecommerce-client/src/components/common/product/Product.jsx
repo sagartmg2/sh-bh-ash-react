@@ -8,7 +8,8 @@ export default function Product({ product }) {  //product={image,name,price}
       <Link to={`/products/${product._id}`}>
         <div className="absolute left-4 top-4 flex gap-2">
           <span
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault()
               alert("added to cart");
             }}
             className="  flex-center h-[30px] w-[30px] scale-0 rounded-full bg-primary-light transition-all group-hover:scale-100 "

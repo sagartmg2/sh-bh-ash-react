@@ -13,6 +13,7 @@ import axios from "axios";
 import { setUser } from "./app/slice/userSlice";
 import { useDispatch } from "react-redux";
 import Addproduct from "./pages/products/Addproduct";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -52,15 +53,19 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Singup />} />
-            <Route path="carts" element={<Cart />} />
+            <Route path="" element={<ProtectedRoute role="buyer" />}>
+              <Route path="carts" element={<Cart />} />
+            </Route>
 
             {/* <Route path='products' element={<Products />} />
         <Route path='products/:slug' element={<SingleProduct />} /> */}
 
             <Route path="products">
-              <Route path="add" element={<Addproduct />} />
               <Route path="" element={<Products />} />
               <Route path=":slug" element={<SingleProduct />} />
+            </Route>
+            <Route path="products" element={<ProtectedRoute role="seller" />}>
+              <Route path="add" element={<Addproduct />} />
             </Route>
           </Routes>
           <footer />
