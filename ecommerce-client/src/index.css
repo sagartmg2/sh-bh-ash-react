@@ -1,41 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-
-@layer components{
-    .header{
-        @apply text-[24px] lg:text-[42px]
-    }
-    .header-sm{
-        @apply text-[32px]
-    }
-    .container{
-        @apply px-3 mx-auto w-full sm:max-w-[600px] md:max-w-[740px] lg:max-w-[990px] xl:max-w-[1216px]
-    }
-
-    /* .btn{
-        @apply button
-    } */
-    .btn{
-        @apply bg-secondary px-10 py-4 text-white rounded-[2px]
-    }
-
-    .flex-center{
-        @apply flex items-center justify-center
-    }
-    
-}
-@layer utilities{
-    .button{
-        background-color: pink;
-    }
-    
-}
+@import url("./tailwind.css");
 
 /* min-with:1536px then .container max-width = 1458px
     min-with:1280px then .container max-width = 1216px

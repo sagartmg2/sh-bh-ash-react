@@ -14,6 +14,7 @@ import { setUser } from "./app/slice/userSlice";
 import { useDispatch } from "react-redux";
 import Addproduct from "./pages/products/Addproduct";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import { setCart } from "./app/slice/cartSlice";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,13 @@ export default function App() {
         });
     } else {
       setisLoading(false);
+    }
+
+    let cartData = localStorage.getItem("cart"); // "1"  praseInt("1") // 1
+
+    if (cartData) {
+      dispatch(setCart(parseInt(cartData)));
+    } else {
     }
   }, []);
 

@@ -4,13 +4,18 @@ import { FaRegHeart, FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 import { useSearchParams ,useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { increment } from "../../app/slice/cartSlice";
 
 export default function SingleProduct() {
+
+  const dispatch = useDispatch()
   const [product, setProduct] = useState({});
   let productId = "64549d085e021d67be48e82a"
    const {slug}  = useParams() 
   console.log(slug)
+
+  
 
   useEffect(() => {
     axios
@@ -60,10 +65,17 @@ export default function SingleProduct() {
                 explicabo laboriosam iusto sunt optio harum voluptatibus,
                 ratione cumque? Itaque, harum?
               </p>
-              <p className="font-Josefin flex items-center gap-7 pl-16 pt-5 text-primary-dark">
+              <button 
+              type="button" 
+              className="font-Josefin flex items-center gap-7 pl-16 pt-5 text-primary-dark"
+              onClick={() =>{
+                dispatch(increment())
+              }}
+              >
+                
                 {" "}
                 Add To Cart <FaRegHeart />{" "}
-              </p>
+              </button>
             </div>
           </div>
         </div>

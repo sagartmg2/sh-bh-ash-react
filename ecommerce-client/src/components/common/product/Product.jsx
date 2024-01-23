@@ -1,8 +1,21 @@
 import React from "react";
 import { CiShoppingCart } from "react-icons/ci";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { increment } from "../../../app/slice/cartSlice";
 export default function Product({ product }) {  //product={image,name,price}
+
+  /* 
+    function useDispatch(){
+     // codes.. 
+      return () =>{
+
+      }
+
+    }
+  */
+
+  const dispatach = useDispatch()   
   return (
     <li className="group relative  border-4  hover:shadow-2xl">
       <Link to={`/products/${product._id}`}>
@@ -10,6 +23,7 @@ export default function Product({ product }) {  //product={image,name,price}
           <span
             onClick={(event) => {
               event.preventDefault()
+              dispatach(increment())
               alert("added to cart");
             }}
             className="  flex-center h-[30px] w-[30px] scale-0 rounded-full bg-primary-light transition-all group-hover:scale-100 "
