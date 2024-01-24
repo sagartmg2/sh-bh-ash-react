@@ -50,6 +50,11 @@ export default function Header() {
                   <Link to="/carts">carts</Link>
                 </li>
               )} */}
+              <ProtectedComponent role={"seller"}>
+              <li>
+              <Link to="/products/seller">seller-products</Link>
+            </li>
+              </ProtectedComponent>
           <BuyerComponent>
             <li>
               <Link to="/carts">carts</Link>

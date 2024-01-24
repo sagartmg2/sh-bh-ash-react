@@ -15,6 +15,9 @@ import { useDispatch } from "react-redux";
 import Addproduct from "./pages/products/Addproduct";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { setCart } from "./app/slice/cartSlice";
+import SellerProducts from "./pages/products/SellerProducts";
+import EditProduct from "./pages/products/EditProduct";
+import UpsertProduct from "./pages/products/UpsertProduct";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -73,7 +76,9 @@ export default function App() {
               <Route path=":slug" element={<SingleProduct />} />
             </Route>
             <Route path="products" element={<ProtectedRoute role="seller" />}>
-              <Route path="add" element={<Addproduct />} />
+              <Route path="seller" element={<SellerProducts />} />
+              <Route path="add" element={<UpsertProduct />} />
+              <Route path="edit/:_id" element={<UpsertProduct />} />
             </Route>
           </Routes>
           <footer />

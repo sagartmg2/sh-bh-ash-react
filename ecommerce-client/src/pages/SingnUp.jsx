@@ -3,13 +3,14 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import axios from "axios";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../constants/domain";
 
 export default function Singup() {
   const navigate = useNavigate()
 
   const handleSubmit = (event) =>{
     event.preventDefault()
-    axios.post("https://ecommerce-sagartmg2.vercel.app/api/users/signup",{
+    axios.post(`${API_URL}/users/signup`,{
       name:event.target.name.value,
       role:event.target.role.value,
       email:event.target.email.value,

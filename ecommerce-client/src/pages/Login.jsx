@@ -2,17 +2,19 @@ import React from "react";
 import BreadCrumb from "../components/common/BreadCrumb";
 import axios from "axios";
 import {  toast } from 'react-toastify';
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate,Link, Navigate } from "react-router-dom";
 import { setUser } from "../app/slice/userSlice";
 import { useDispatch } from "react-redux";
+import { API_URL } from "../constants/domain";
 
 export default function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const user ={naem:"adf"}
 
   const handleSubmit = (event) =>{
     event.preventDefault()
-    axios.post("https://ecommerce-sagartmg2.vercel.app/api/users/login",{
+    axios.post(`${API_URL}/users/login`,{
       email:event.target.email.value,
       password:event.target.password.value
     })
@@ -30,6 +32,11 @@ export default function Login() {
       // when status code 3,4,5 
     })
   }
+
+  if(user){
+    return <Navigate to="/" />
+  }
+
   return (
     <>
       <BreadCrumb

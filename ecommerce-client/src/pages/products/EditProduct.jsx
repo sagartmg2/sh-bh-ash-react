@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../../components/common/Input";
 import axios from "axios";
 
-export default function Addproduct() {
+export default function EditProduct() {
   /*  */
 
   const handleSubmit = (e) => {
@@ -23,12 +23,13 @@ export default function Addproduct() {
 
   return (
     <form className="max-w-[700px] container mt-5 " onSubmit={handleSubmit}>
+      Edit Product
       <div className="grid gap-x-4 gap-y-0 md:grid-cols-2 lg:grid-cols-3">
         <div className="form-group">
           <label htmlFor="" className="form-label required-field">
             Name
           </label>
-          <input name="name" className="form-control" type="text" placeholder="Name" />
+          <input value={"watch"} name="name" className="form-control" type="text" placeholder="Name" />
         </div>
         <div className="form-group">
           <label htmlFor="" className="form-label required-field">

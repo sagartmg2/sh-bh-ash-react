@@ -4,6 +4,8 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoute({role}) {
   let user = useSelector((store) => store.user.value);
+  console.log(user) // null
+
   if (user?.role == role) {
     return <Outlet />;
   }
