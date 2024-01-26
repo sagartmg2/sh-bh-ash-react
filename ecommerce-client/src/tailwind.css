@@ -22,6 +22,9 @@
     .btn{
         @apply bg-secondary px-10 py-4 text-white rounded-[2px]
     }
+    .btn-sm{
+        @apply bg-secondary px-5 py-2 text-white rounded-[2px]
+    }
 
     .flex-center{
         @apply flex items-center justify-center
@@ -50,4 +53,9 @@
 
 /* .required-field::after{
     content:"*";
+} */
+
+/* button:disabled{
+    opacity: .5;
+    cursor: no-drop;
 } */
