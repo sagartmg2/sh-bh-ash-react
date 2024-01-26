@@ -18,13 +18,12 @@ export default function UpsertProduct() {
     price: "",
     description: "",
     in_stock: "",
-    categories: ["cat-1", ""],
+    categories: ["cat-1", "cat-2"],
   };
   const [data, setData] = useState(initialValue);
 
   const [isSubmitting, setisSubmitting] = useState(false);
-  const [errors,setErros] = useState({
-    name:"this field required"
+  const [validationError, setErros] = useState({
   });
 
   useEffect(() => {
@@ -39,6 +38,21 @@ export default function UpsertProduct() {
         });
     }
   }, []);
+
+  // let categories = ["one", "two", "three"];
+  // function changeCategoryValue(index, newValue) {
+  //   // code here
+  //   // let temp = [...categories]
+  //   // temp[index] = newValue
+  //   return categories.map((el,idx) =>{
+  //     if(index == idx){
+  //       return newValue
+  //     }
+  //     return el
+  //   })
+  // }
+
+  // console.log("outpu",changeCategoryValue(1, "category-one"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,6 +77,15 @@ export default function UpsertProduct() {
       })
       .catch((err) => {
         setisSubmitting(false);
+        if (err.response?.status == 400) {
+          let errObj = {};
+          err.response.data.errors.forEach((el) => {
+            errObj[el.param] = el.msg
+          });
+          console.log(errObj);
+          setErros(errObj);
+        }
+        console.log(err.response.data);
         toast.error("something went wrong");
       });
   };
@@ -73,8 +96,32 @@ export default function UpsertProduct() {
       [e.target.name]: e.target.value,
     });
   };
-  const handleCategoychange = () => {};
+  const handleCategoychange = (e) => {
+    let temp = data.categories.map((el, idx) => {
+      if (index == idx) {
+        return e.target.value;
+      }
+      return el;
+    });
 
+    setData({
+      ...data,
+      categories: temp,
+    });
+  };
+
+  const addCategory = () => {
+    // let temp = data.categories // this is wrong // reference is stored in temp //  ["cat-1","cat-2"]
+    let temp = [...data.categories]; // ["cat-1","cat-2"]
+    temp.push("");
+
+    // temp// ["cat-1","cat-2",""]
+    setData({
+      ...data,
+      // categories:[...data.categories,""], // this is also wring
+      categories: temp,
+    });
+  };
   return (
     <form className="container mt-5 max-w-[700px] " onSubmit={handleSubmit}>
       Edit Product {JSON.stringify(_id)}
@@ -91,7 +138,9 @@ export default function UpsertProduct() {
             type="text"
             placeholder="Name"
           />
-          <span className="text-red-500 text-sm">this field is required : Try this</span>
+          {validationError.name && (
+            <span className="text-sm text-red-500">{validationError.name}</span>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="" className="form-label required-field">
@@ -105,6 +154,9 @@ export default function UpsertProduct() {
             type="number"
             placeholder="Price"
           />
+           {validationError.price && (
+            <span className="text-sm text-red-500">{validationError.price}</span>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="" className="form-label">
@@ -122,16 +174,26 @@ export default function UpsertProduct() {
         <div className="form-group">
           <label htmlFor="" className="form-label">
             Category{" "}
-            <button type="button" className="btn-sm">
+            <button onClick={addCategory} type="button" className="btn-sm">
               Add
             </button>
           </label>
-          <div className="flex">
-            <input className="form-control inline w-auto" />{" "}
-            <button className="btn-sm">delete</button>
-          </div>
+          {data.categories.map((el, index) => {
+            return (
+              <div className="my-2 flex">
+                <input
+                  value={el}
+                  className="form-control inline w-auto"
+                  onChange={handleCategoychange}
+                />
+                <button type="button" className="btn-sm">
+                  delete
+                </button>
+              </div>
+            );
+          })}
         </div>
-       
+
         <div className="form-group col-span-3">
           <label htmlFor="" className="form-label">
             description

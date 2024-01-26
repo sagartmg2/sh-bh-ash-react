@@ -10,7 +10,6 @@ import { API_URL } from "../constants/domain";
 export default function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const user ={naem:"adf"}
 
   const handleSubmit = (event) =>{
     event.preventDefault()
@@ -32,10 +31,7 @@ export default function Login() {
       // when status code 3,4,5 
     })
   }
-
-  if(user){
-    return <Navigate to="/" />
-  }
+ 
 
   return (
     <>
