@@ -18,13 +18,13 @@ export default function UpsertProduct() {
     price: "",
     description: "",
     in_stock: "",
-    categories: ["cat-1", "cat-2"],
+    categories: [""],
+    image: null,
   };
   const [data, setData] = useState(initialValue);
 
   const [isSubmitting, setisSubmitting] = useState(false);
-  const [validationError, setErros] = useState({
-  });
+  const [validationError, setErros] = useState({});
 
   useEffect(() => {
     if (_id) {
@@ -56,31 +56,43 @@ export default function UpsertProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let productData = data;
     let access_token = localStorage.getItem("access_token");
 
+    let formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("description", data.description);
+    formData.append("image", data.image);
+    data.categories.forEach((cat) => {
+      formData.append("categories", cat);
+    });
     setisSubmitting(true);
-    axios
-      .post(
-        "https://ecommerce-sagartmg2.vercel.app/api/products",
-        productData,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        },
-      )
+    let url = "https://ecommerce-sagartmg2.vercel.app/api/products";
+    let method = "post";
+    if (_id) {
+      method = "put";
+      url = "https://ecommerce-sagartmg2.vercel.app/api/products/" + _id;
+    }
+    axios[method](url, formData, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
       .then((res) => {
         setisSubmitting(false);
-        toast("product created.");
-        setData(initialValue);
+        if (!_id) {
+          toast("product created.");
+          setData(initialValue);
+        } else {
+          toast("product updated.");
+        }
       })
       .catch((err) => {
         setisSubmitting(false);
         if (err.response?.status == 400) {
           let errObj = {};
           err.response.data.errors.forEach((el) => {
-            errObj[el.param] = el.msg
+            errObj[el.param] = el.msg;
           });
           console.log(errObj);
           setErros(errObj);
@@ -93,10 +105,11 @@ export default function UpsertProduct() {
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.type == "file" ? e.target.files[0] : e.target.value,
     });
   };
-  const handleCategoychange = (e) => {
+  const handleCategoychange = (e, index) => {
     let temp = data.categories.map((el, idx) => {
       if (index == idx) {
         return e.target.value;
@@ -122,6 +135,16 @@ export default function UpsertProduct() {
       categories: temp,
     });
   };
+
+  const deleteCategory = (index) => {
+    let temp = [...data.categories]; //["cat-1","cat-2",]
+    temp.splice(index, 1);
+    setData({
+      ...data,
+      categories: temp,
+    });
+  };
+
   return (
     <form className="container mt-5 max-w-[700px] " onSubmit={handleSubmit}>
       Edit Product {JSON.stringify(_id)}
@@ -154,8 +177,10 @@ export default function UpsertProduct() {
             type="number"
             placeholder="Price"
           />
-           {validationError.price && (
-            <span className="text-sm text-red-500">{validationError.price}</span>
+          {validationError.price && (
+            <span className="text-sm text-red-500">
+              {validationError.price}
+            </span>
           )}
         </div>
         <div className="form-group">
@@ -178,15 +203,24 @@ export default function UpsertProduct() {
               Add
             </button>
           </label>
+          {/* ["cat1","cat2"] */}
           {data.categories.map((el, index) => {
             return (
               <div className="my-2 flex">
                 <input
                   value={el}
                   className="form-control inline w-auto"
-                  onChange={handleCategoychange}
+                  onChange={(e) => {
+                    handleCategoychange(e, index);
+                  }}
                 />
-                <button type="button" className="btn-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    deleteCategory(index);
+                  }}
+                  className="btn-sm"
+                >
                   delete
                 </button>
               </div>
@@ -194,6 +228,25 @@ export default function UpsertProduct() {
           })}
         </div>
 
+        <div className="form-group col-span-3">
+          <label htmlFor="" className="form-label">
+            Image
+          </label>
+          <input
+            // onChange={(e) =>{
+            //   console.log(e.target.files[0]);
+            //   setData({
+            //     ...data,
+            //     image:e.target.files[0]
+            //   })
+
+            // }}
+            onChange={handleChange}
+            type="file"
+            name="image"
+            className="form-control"
+          />
+        </div>
         <div className="form-group col-span-3">
           <label htmlFor="" className="form-label">
             description
@@ -212,7 +265,7 @@ export default function UpsertProduct() {
         disabled={isSubmitting}
         className="btn disabled:cursor-no-drop disabled:opacity-50 "
       >
-        {isSubmitting ? "loading..." : "submit"}
+        {isSubmitting ? "loading..." : _id ? "edit" : "store"}
       </button>
       {/* <Input name={"name"}/>
       <Input name={"price"} type="number"/> */}

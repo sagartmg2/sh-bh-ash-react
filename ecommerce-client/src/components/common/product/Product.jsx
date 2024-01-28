@@ -2,7 +2,7 @@ import React from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { increment } from "../../../app/slice/cartSlice";
+import { addToCart, increment } from "../../../app/slice/cartSlice";
 export default function Product({ product }) {  //product={image,name,price}
 
   /* 
@@ -23,7 +23,8 @@ export default function Product({ product }) {  //product={image,name,price}
           <span
             onClick={(event) => {
               event.preventDefault()
-              dispatach(increment())
+              // dispatach(increment())
+              dispatach(addToCart(product))
               alert("added to cart");
             }}
             className="  flex-center h-[30px] w-[30px] scale-0 rounded-full bg-primary-light transition-all group-hover:scale-100 "
