@@ -4,11 +4,6 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     value: [],
-    // [
-    //   {"name:one",_id,quantity:1}
-    //   {"name:two",_id,quantity:2}
-    // ]
-
   },
   reducers: {
     setCart: (state, action) => {
@@ -17,17 +12,31 @@ export const cartSlice = createSlice({
     addToCart:(state,action)=>{
       let product = action.payload
       let temp = [...state.value]
-      /* code here.. */
+
+      if(temp.find(el =>el._id == product._id )){
+            temp = temp.map(el =>{
+              if(el._id == product._id){
+                return {...el,quantity:el.quantity +1}
+              }
+              return el
+            })
+      }else{
+        temp.push({...product,quantity:1})
+      }
 
       state.value = temp
+      localStorage.setItem("cartItems",JSON.stringify(state.value))
 
     },
-    increment: (state) => {
-      state.value += 1;
-      localStorage.setItem("cart", state.value);
+    increment: (state,action) => {
+        console.log(action.payload)
+      localStorage.setItem("cartItems",JSON.stringify(state.value))
+
     },
-    decrement: (state) => {
-      state.value -= 1;
+    decrement: (state,action) => {
+      let product = action.payload
+      localStorage.setItem("cartItems",JSON.stringify(state.value))
+
     },
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState  } from "react";
 import Header from "./components/common/Header";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -43,10 +43,10 @@ export default function App() {
       setisLoading(false);
     }
 
-    let cartData = localStorage.getItem("cart"); // "1"  praseInt("1") // 1
+    let cartData = JSON.parse(localStorage.getItem("cartItems"));
 
     if (cartData) {
-      dispatch(setCart(parseInt(cartData)));
+      dispatch(setCart(cartData));
     } else {
     }
   }, []);

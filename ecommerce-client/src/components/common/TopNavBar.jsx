@@ -19,7 +19,7 @@ export default function TopNavBar() {
 
   const reduxStore = useSelector((store) => store);
   const user = reduxStore.user.value;
-  const cart = reduxStore.cart.value;
+  const cart = reduxStore.cart.value; // [{}]
 
 
   const dispatach = useDispatch();
@@ -50,7 +50,7 @@ export default function TopNavBar() {
         */}
 
         <div className="flex items-center gap-2">
-          <BuyerComponent>cart({cart})</BuyerComponent>
+          <BuyerComponent>cart({cart.length})</BuyerComponent>
           {user ? (
             <>
               <span>{user.name}</span>
