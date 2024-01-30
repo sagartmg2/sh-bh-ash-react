@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement } from "../app/slice/cartSlice";
+import { addToCart, decrement, increment } from "../app/slice/cartSlice";
 
 export default function Cart() {
   const cartItems = useSelector((store) => store.cart.value);
@@ -33,7 +33,11 @@ export default function Cart() {
                       -
                     </button>
                     {item.quantity}
-                    <button className="btn-sm bg-primary text-2xl rounded-full" type="button">
+                    <button 
+                      onClick={()=>{
+                        dispatch(addToCart(item))
+                      }}
+                    className="btn-sm bg-primary text-2xl rounded-full" type="button">
                       +
                     </button>
                   </td>

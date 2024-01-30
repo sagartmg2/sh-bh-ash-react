@@ -31,7 +31,7 @@ export default function Login() {
       // when status code 3,4,5 
     })
   }
- 
+  
 
   return (
     <>
@@ -43,7 +43,9 @@ export default function Login() {
         ]}
       />
       <div className="w-full max-w-xs container my-20">
-        <form onSubmit={handleSubmit}className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md">
+        <form onSubmit={(event) =>{
+          handleSubmit(event)
+        }} className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md">
           <div className="mb-4">
             <label
               className="mb-2 block text-sm font-bold text-gray-700"

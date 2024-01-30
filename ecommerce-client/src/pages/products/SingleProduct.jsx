@@ -2,30 +2,38 @@ import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../components/common/BreadCrumb";
 import { FaRegHeart, FaArrowRight } from "react-icons/fa";
 import axios from "axios";
-import { useSearchParams ,useParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { increment } from "../../app/slice/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, increment } from "../../app/slice/cartSlice";
+import useAuthenticate from "../../hooks/useAuthenticate";
+import checkAuthentication from "../../hooks/checkAuthentication";
 
 export default function SingleProduct() {
-
-  const dispatch = useDispatch()
+  const user = useSelector((store) => store.user.value);
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({});
-  let productId = "64549d085e021d67be48e82a"
-   const {slug}  = useParams() 
-  console.log(slug)
-
-  
+  let productId = "64549d085e021d67be48e82a";
+  const { slug } = useParams();
+  console.log(slug);
 
   useEffect(() => {
     axios
-      .get(
-        "https://ecommerce-sagartmg2.vercel.app/api/products/"+slug,
-      )
+      .get("https://ecommerce-sagartmg2.vercel.app/api/products/" + slug)
       .then((res) => {
         setProduct(res.data.data);
-      });
+      })
+      .catch(err =>{
+        toast.error("something went wrong. try again later.")
+      })
   }, []);
+
+  const authenticate = useAuthenticate()
+  // const authenticate = checkAuthentication();
+
+  const addReview = () =>{
+    alert("review added.")
+  }
 
   return (
     <>
@@ -47,7 +55,7 @@ export default function SingleProduct() {
                 className="ml-5 mr-5 mt-[25px] h-[400px] w-[550px] object-contain"
               />
             </div>
-            <div className="pl-10 pt-16 w-1/2">
+            <div className="w-1/2 pl-10 pt-16">
               <h1 className="font-Josefin text-[36px] font-semibold text-primary-dark">
                 {product.name}
               </h1>
@@ -65,15 +73,22 @@ export default function SingleProduct() {
                 explicabo laboriosam iusto sunt optio harum voluptatibus,
                 ratione cumque? Itaque, harum?
               </p>
-              <button 
-              type="button" 
-              className="font-Josefin flex items-center gap-7 pl-16 pt-5 text-primary-dark"
-              onClick={() =>{
-                dispatch(increment())
-              }}
+              <button
+                type="button"
+                className="font-Josefin flex items-center gap-7 pl-16 pt-5 text-primary-dark"
+                onClick={() => {
+                  // if (user) {
+                  //   dispatch(increment());
+                  // } else {
+                  //   toast.error("login required.");
+                  // }
+
+                  authenticate(() =>{
+                    dispatch(addToCart(product))
+                  })
+
+                }}
               >
-                
-                {" "}
                 Add To Cart <FaRegHeart />{" "}
               </button>
             </div>
@@ -81,11 +96,21 @@ export default function SingleProduct() {
         </div>
       </div>
 
-      <form onSubmit={(e) =>{
-        e.preventDefault()
-        toast.error("login requried.")
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
 
-      }}>
+
+
+          // if (user) {
+          //   alert("add review");
+          // } else {
+          //   toast.error("login requried.");
+          // }
+
+          authenticate(addReview)
+        }}
+      >
         <input type="text" className="border px-4 py-2" />
         <input type="text" className="border px-4 py-2" />
         <button className="btn">Add Review</button>
