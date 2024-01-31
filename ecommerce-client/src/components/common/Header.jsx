@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   CiLogin,
   CiMail,
@@ -7,7 +7,6 @@ import {
   CiShoppingCart,
 } from "react-icons/ci";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import TopNavBar from "./TopNavBar";
 import BuyerComponent from "./BuyerComponent";
 import SellerComponent from "./SellerComponent";
@@ -15,8 +14,7 @@ import ProtectedComponent from "./ProtectedComponent";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const user = useSelector((store) => store.user.value); //
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     // setIsMenuOpen(!isMenuOpen)
@@ -50,11 +48,11 @@ export default function Header() {
                   <Link to="/carts">carts</Link>
                 </li>
               )} */}
-              <ProtectedComponent role={"seller"}>
-              <li>
+          <ProtectedComponent role={"seller"}>
+            <li>
               <Link to="/products/seller">seller-products</Link>
             </li>
-              </ProtectedComponent>
+          </ProtectedComponent>
           <BuyerComponent>
             <li>
               <Link to="/carts">carts</Link>
@@ -73,15 +71,22 @@ export default function Header() {
               <Link to="/products/add">add-products</Link>
             </li>
           </SellerComponent> */}
-           
+
           <ProtectedComponent role="seller">
             <li>
               <Link to="/products/add">add-products</Link>
             </li>
           </ProtectedComponent>
         </ul>
-        <form className="flex w-full justify-center lg:w-auto">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate("/products?searchTerm=" + e.target.searchTerm.value);
+          }}
+          className="flex w-full justify-center lg:w-auto"
+        >
           <input
+            name="searchTerm"
             className="border border-[#E7E6EF] px-3 focus:border-secondary focus:outline-none"
             type="text"
           />

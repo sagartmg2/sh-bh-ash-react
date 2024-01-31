@@ -7,13 +7,10 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, increment } from "../../app/slice/cartSlice";
 import useAuthenticate from "../../hooks/useAuthenticate";
-import checkAuthentication from "../../hooks/checkAuthentication";
 
 export default function SingleProduct() {
-  const user = useSelector((store) => store.user.value);
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
-  let productId = "64549d085e021d67be48e82a";
   const { slug } = useParams();
   console.log(slug);
 
@@ -23,17 +20,26 @@ export default function SingleProduct() {
       .then((res) => {
         setProduct(res.data.data);
       })
-      .catch(err =>{
-        toast.error("something went wrong. try again later.")
-      })
+      .catch((err) => {
+        toast.error("something went wrong. try again later.");
+      });
   }, []);
 
-  const authenticate = useAuthenticate()
+  const authenticate = useAuthenticate();
   // const authenticate = checkAuthentication();
 
-  const addReview = () =>{
-    alert("review added.")
-  }
+  const addReview = (data) => {
+    alert("review added.");
+    axios.put(
+      "https://ecommerce-sagartmg2.vercel.app/api/products/review/" + slug,
+      data,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      },
+    );
+  };
 
   return (
     <>
@@ -83,10 +89,9 @@ export default function SingleProduct() {
                   //   toast.error("login required.");
                   // }
 
-                  authenticate(() =>{
-                    dispatch(addToCart(product))
-                  })
-
+                  authenticate(() => {
+                    dispatch(addToCart(product));
+                  });
                 }}
               >
                 Add To Cart <FaRegHeart />{" "}
@@ -100,19 +105,23 @@ export default function SingleProduct() {
         onSubmit={(e) => {
           e.preventDefault();
 
-
-
           // if (user) {
+          // addReview({rating:e.target.rating.value})
           //   alert("add review");
           // } else {
           //   toast.error("login requried.");
           // }
 
-          authenticate(addReview)
+          authenticate(() => {
+            addReview({
+              rating: e.target.rating.value,
+              comment: e.target.comment.value,
+            });
+          });
         }}
       >
-        <input type="text" className="border px-4 py-2" />
-        <input type="text" className="border px-4 py-2" />
+        <input name="rating" type="text" className="border px-4 py-2" />
+        <input name="comment" type="text" className="border px-4 py-2" />
         <button className="btn">Add Review</button>
       </form>
 
